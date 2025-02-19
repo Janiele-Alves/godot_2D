@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvpqvftbetyqj"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_lsgfc"]
+[ext_resource type="Texture2D" uid="uid://cmcsbhtrr3cky" path="res://art/gfx/16bit_bomb1.png" id="2_j75t4"]
+[ext_resource type="Texture2D" uid="uid://dg2x1bpjywysm" path="res://art/gfx/16_bit_bomb2.png" id="3_h4tb0"]
+[ext_resource type="Texture2D" uid="uid://cbmpghxwxn570" path="res://art/gfx/16_bit_bomb3.png" id="4_8h7u0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8whde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j75t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h4tb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8h7u0")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j75t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h4tb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8h7u0")
+}],
+"loop": true,
+"name": &"go_down_mob",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j75t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h4tb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8h7u0")
+}],
+"loop": true,
+"name": &"go_up_bob",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j75t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h4tb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8h7u0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0r88"]
+radius = 26.0
+height = 52.0
+
+[node name="Enemy" type="RigidBody2D"]
+position = Vector2(116, 97)
+gravity_scale = 0.0
+script = ExtResource("1_lsgfc")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, -7.5)
+scale = Vector2(4.75, 4.8125)
+sprite_frames = SubResource("SpriteFrames_8whde")
+animation = &"go_down_mob"
+frame_progress = 0.300651
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_r0r88")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
